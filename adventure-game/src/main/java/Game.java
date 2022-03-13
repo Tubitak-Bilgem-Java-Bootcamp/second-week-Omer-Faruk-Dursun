@@ -25,7 +25,7 @@ public class Game {
         Location location =  new SafeHouse(player);
         while(true){
             boolean continueGame = true;
-            player.getPlayerStats();
+            player.getStats();
             System.out.println(ASCI_ART_MAIN_ART);
             System.out.println("Please select the location you want to go.");
             System.out.println("1. Safe House --->  Restores health to full");

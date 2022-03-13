@@ -4,8 +4,8 @@ public class Samurai extends GameCharacter {
 
     private final static Integer ID = 1;
     private final static String NAME = "Samurai";
-    private final static Integer SAMURAI_HEALTH = 5;
-    private final static Integer SAMURAI_DAMAGE = 21;
+    private final static Integer SAMURAI_HEALTH = 21;
+    private final static Integer SAMURAI_DAMAGE = 5;
     private final static Integer SAMURAI_MONEY = 15;
     private final static String asciiArt = "  " +
             "/|\n" +
@@ -23,7 +23,6 @@ public class Samurai extends GameCharacter {
 
     @Override
     public String toString() {
-        String characterDescription = asciiArt + "\n" + getId() +") Name = " + getName() + ", Base Health = " + getHealth() + ", Base Damage = " + getDamage() + ", Money = " + getMoney();
-        return characterDescription;
+        return asciiArt + "\n" + getId() +") Name = " + getName() + ", Base Health = " + getHealth() + ", Base Damage = " + getDamage() + ", Money = " + getMoney();
     }
 }

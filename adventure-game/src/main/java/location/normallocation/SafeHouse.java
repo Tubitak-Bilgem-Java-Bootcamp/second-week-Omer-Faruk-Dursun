@@ -14,6 +14,7 @@ public class SafeHouse extends NormalLocation{
     public boolean onLocation() {
         System.out.println("You are on the " + LOCATION_NAME +" !");
         System.out.println("Your health have been restored to full !");
+        getPlayer().setHealth(getPlayer().getMaxHealth());
         return super.onLocation();
     }
 }

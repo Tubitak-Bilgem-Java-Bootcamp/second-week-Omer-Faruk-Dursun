@@ -4,8 +4,8 @@ public class Knight extends GameCharacter {
 
     private final static Integer ID = 3;
     private final static String NAME = "Knight";
-    private final static Integer KNIGHT_HEALTH = 8;
-    private final static Integer KNIGHT_DAMAGE = 24;
+    private final static Integer KNIGHT_HEALTH = 24;
+    private final static Integer KNIGHT_DAMAGE = 8;
     private final static Integer KNIGHT_MONEY = 5;
     private final static String asciiArt = "" +
             "|`-._/\\_.-`|\n" +
@@ -23,8 +23,7 @@ public class Knight extends GameCharacter {
 
     @Override
     public String toString() {
-        String characterDescription = asciiArt + "\n" + getId() +") Name = " + getName() + ", Base Health = " + getHealth() + ", Base Damage = " + getDamage() + ", Money = " + getMoney();
-        return characterDescription;
+        return asciiArt + "\n" + getId() +") Name = " + getName() + ", Base Health = " + getHealth() + ", Base Damage = " + getDamage() + ", Money = " + getMoney();
     }
 
 }

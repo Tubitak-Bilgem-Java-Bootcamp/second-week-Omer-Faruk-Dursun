@@ -12,6 +12,7 @@ public class Player {
 
     final private String name;
     private String characterName;
+    private Integer maxHealth;
     private Integer health;
     private Integer damage;
     private Integer money;
@@ -24,6 +25,14 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(Integer maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public String getCharacterName() {
@@ -39,10 +48,16 @@ public class Player {
     }
 
     public void setHealth(Integer health) {
+        if (health < 0)
+            health = 0;
         this.health = health;
     }
 
     public Integer getDamage() {
+        return damage ;
+    }
+
+    public Integer getTotalDamage() {
         return damage + getInventory().getWeapon().getDamage();
     }
 
@@ -63,45 +78,57 @@ public class Player {
     }
 
     public void selectCharacter() {
+
         System.out.println("Please select the character you want to play:");
         GameCharacter[] gameCharacters = {new Samurai(), new Archer(), new Knight()};
 
-        for (GameCharacter e : gameCharacters) {
-            System.out.println(e);
-            System.out.println("-------------------------------------------");
+        boolean flag = true;
+
+        while(flag){
+            for (GameCharacter e : gameCharacters) {
+                System.out.println(e);
+                System.out.println("-------------------------------------------");
+            }
+
+            Scanner scanner = new Scanner(System.in);
+            int characterSelectionInput = scanner.nextInt();
+
+            switch (characterSelectionInput) {
+                case 1:
+                    initPlayerStats(new Samurai());
+                    flag = false;
+                    break;
+                case 2:
+                    initPlayerStats(new Archer());
+                    flag = false;
+                    break;
+                case 3:
+                    initPlayerStats(new Knight());
+                    flag = false;
+                    break;
+                default:
+                    System.out.println("Please enter a valid character.");
+            }
         }
 
-        Scanner scanner = new Scanner(System.in);
-        int characterSelectionInput = scanner.nextInt();
-
-        switch (characterSelectionInput) {
-            case 1:
-                initPlayerStats(new Samurai());
-                break;
-            case 2:
-                initPlayerStats(new Archer());
-                break;
-            case 3:
-                initPlayerStats(new Knight());
-                break;
-            default:
-                initPlayerStats(new Knight());
-        }
     }
 
     private void initPlayerStats(GameCharacter gameCharacter) {
         setCharacterName(gameCharacter.getName());
         setDamage(gameCharacter.getDamage());
         setHealth(gameCharacter.getHealth());
+        setMaxHealth(gameCharacter.getHealth());
         setMoney(gameCharacter.getMoney());
     }
 
-    public void getPlayerStats() {
+    public void getStats() {
         System.out.println("\n");
         System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~");
         System.out.println("Your selected character is " + this.getCharacterName()
                 + "\nHealth " + getHealth()
+                + "\nWeapon " + getInventory().getWeapon().getName()
                 + "\nDamage " + getDamage()
+                + "\nArmor " + getInventory().getArmor().getName()
                 + "\nBlock " + getInventory().getArmor().getBlock()
                 + "\nMoney " + getMoney());
         System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~\n");
