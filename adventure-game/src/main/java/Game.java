@@ -13,7 +13,6 @@ public class Game {
         String playerName = scanner.nextLine();
         Player player = new Player(playerName);
         System.out.println(player.getName()+ " welcome to the game !");
-        System.out.println("Please select the character you want to play:");
         player.selectCharacter();
     }
 }
