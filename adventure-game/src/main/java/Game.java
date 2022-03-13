@@ -50,13 +50,13 @@ public class Game {
                     location = new ItemStore(player);
                     break;
                 case 3:
-                    location = new Cave(player);
+                    location = selectCave(player);
                     break;
                 case 4:
-                    location = new Forest(player);
+                    location = selectForest(player);
                     break;
                 case 5:
-                    location = new River(player);
+                    location = selectRiver(player);
                     break;
                 default:
                     System.out.println("Please enter a valid location.");
@@ -77,4 +77,59 @@ public class Game {
             }
         }
     }
+
+    private Location selectCave(Player player) {
+        Location location;
+        if (!checkIfCompletedCave(player)){
+            location = new Cave(player);
+        }
+        else{
+            System.out.println("You already completed this area");
+            location = new SafeHouse(player);
+        }
+        return location;
+    }
+
+    private Location selectForest(Player player) {
+        Location location;
+        if (!checkIfCompletedForest(player)){
+            location = new Forest(player);
+        }
+        else{
+            System.out.println("You already completed this area");
+            location = new SafeHouse(player);
+        }
+        return location;
+    }
+
+    private Location selectRiver(Player player) {
+        Location location;
+        if (!checkIfCompletedRiver(player)){
+            location = new River(player);
+        }
+        else{
+            System.out.println("You already completed this area");
+            location = new SafeHouse(player);
+        }
+        return location;
+    }
+
+    private boolean checkIfCompletedCave(Player player) {
+        if (player.getInventory().isFood())
+            return true;
+        return false;
+    }
+
+    private boolean checkIfCompletedForest(Player player) {
+        if (player.getInventory().isFirewood())
+            return true;
+        return false;
+    }
+
+    private boolean checkIfCompletedRiver(Player player) {
+        if (player.getInventory().isWater())
+            return true;
+        return false;
+    }
+
 }
