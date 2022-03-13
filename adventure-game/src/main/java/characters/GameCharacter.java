@@ -35,8 +35,4 @@ public abstract class GameCharacter {
         return money;
     }
 
-    @Override
-    public String toString() {
-        return id +" character name=" + name + " health=" + health + ", damage=" + damage + ", money=" + money;
-    }
 }

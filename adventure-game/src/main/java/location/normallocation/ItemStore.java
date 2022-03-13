@@ -1,7 +1,8 @@
-package location;
+package location.normallocation;
 
 import Item.Armor;
 import Item.Weapon;
+import location.Location;
 import player.Player;
 
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 public class ItemStore extends Location {
 
     private final static String LOCATION_NAME = "Item Store";
+    private final static String ITEM_STORE_ASCII_ART = "<+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+><+>";
 
     public ItemStore(Player player) {
         super(player, LOCATION_NAME);
@@ -16,12 +18,14 @@ public class ItemStore extends Location {
 
     @Override
     public boolean onLocation() {
+        System.out.println(ITEM_STORE_ASCII_ART);
         System.out.println("Welcome to the " + LOCATION_NAME);
         boolean stayInShop = true;
         while(stayInShop){
             System.out.println("1 - Weapons");
             System.out.println("2 - Armors");
             System.out.println("3 - Exit the store");
+            System.out.println(ITEM_STORE_ASCII_ART);
             Scanner scanner = new Scanner(System.in);
             int storeSelectionInput = scanner.nextInt();
             if (storeSelectionInput < 1 || storeSelectionInput > 3) {
@@ -47,12 +51,14 @@ public class ItemStore extends Location {
     }
 
     private void showWeapons() {
+        System.out.println(ITEM_STORE_ASCII_ART);
         System.out.println("Weapons : ");
         System.out.println("0 to exit");
         for (Weapon w : Weapon.listWeapons()) {
             System.out.println(w.getId() + " name: " + w.getName() + " damage: " + w.getDamage() + " price: " + w.getPrice());
         }
         System.out.println("Please select a weapon:");
+        System.out.println(ITEM_STORE_ASCII_ART);
     }
 
     private void purchaseWeapon(){
@@ -81,12 +87,14 @@ public class ItemStore extends Location {
     }
 
     private void showArmors() {
+        System.out.println(ITEM_STORE_ASCII_ART);
         System.out.println("Armor : ");
         System.out.println("0 to exit");
         for (Armor w : Armor.listArmors()) {
             System.out.println(w.getId() + " name: " + w.getName() + " damage: " + w.getBlock() + " price: " + w.getPrice());
         }
         System.out.println("Please select an armor:");
+        System.out.println(ITEM_STORE_ASCII_ART);
     }
 
     private void purchaseArmor(){

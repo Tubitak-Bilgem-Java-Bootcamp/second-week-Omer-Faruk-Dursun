@@ -1,4 +1,4 @@
-package location;
+package location.normallocation;
 
 import player.Player;
 

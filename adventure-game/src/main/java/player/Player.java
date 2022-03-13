@@ -68,9 +68,9 @@ public class Player {
 
         for (GameCharacter e : gameCharacters) {
             System.out.println(e);
+            System.out.println("-------------------------------------------");
         }
 
-        System.out.println("-------------------------------------------");
         Scanner scanner = new Scanner(System.in);
         int characterSelectionInput = scanner.nextInt();
 
@@ -97,10 +97,14 @@ public class Player {
     }
 
     public void getPlayerStats() {
+        System.out.println("\n");
+        System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~");
         System.out.println("Your selected character is " + this.getCharacterName()
-                + ", health " + getHealth()
-                + ", damage " + getDamage()
-                + ", money " + getMoney() + "\n");
+                + "\nHealth " + getHealth()
+                + "\nDamage " + getDamage()
+                + "\nBlock " + getInventory().getArmor().getBlock()
+                + "\nMoney " + getMoney());
+        System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~\n");
     }
 
     public void selectLocation() {
