@@ -56,13 +56,11 @@ public abstract class BattleLocation extends Location {
     private void getLocationAward() {
         System.out.println("You gained the " + getAward() + " for defeating all the monsters in this area");
 
-        if (this.award == "Food"){
+        if (this.award == "Food") {
             getPlayer().getInventory().setFood(true);
-        }
-        else if (this.award == "Firewood"){
+        } else if (this.award == "Firewood") {
             getPlayer().getInventory().setFirewood(true);
-        }
-        else{
+        } else {
             getPlayer().getInventory().setWater(true);
         }
     }
@@ -77,36 +75,90 @@ public abstract class BattleLocation extends Location {
             getObstacle().setHealth(getObstacle().getMaxHealth());
             battleInfo();
 
-            while (getPlayer().getHealth() > 0 && getObstacle().getHealth() > 0) {
-                System.out.println("<A>ttack or <R>un away ?");
-                String battleChoice = scanner.nextLine();
-                battleChoice = battleChoice.toUpperCase();
+            boolean isPlayerFirst = determineFirstAttacker();
+
+            while (isBothAlive()) {
+
+                String battleChoice = getBattleChoiceFromPlayer();
 
                 if (battleChoice.equals("A")) {
-                    playerAttacks();
-                    battleInfo();
-
-                    if (isAlive(getObstacle())) {
-                        obstacleAttacks();
-                        battleInfo();
+                    if (isPlayerFirst) {
+                        playerFirstBattleRound();
+                    } else {
+                        playerSecondBattleRound();
                     }
-
                 } else {
                     System.out.println("You ran away ... coward.");
                     return false;
                 }
             }
 
-            if (getObstacle().getHealth() < getPlayer().getHealth()){
-                System.out.println("You won !");
-                System.out.println("You gained " + getObstacle().getAwardOnDefeat() + " money");
-                calculatePlayerMoney();
-            }
-            else {
+            if (isPlayerAlive()) {
+                gainMoneyAfterVictory();
+            } else {
                 return false;
             }
         }
         return true;
+    }
+
+    private void gainMoneyAfterVictory() {
+        System.out.println("You won !");
+        System.out.println("You gained " + getObstacle().getAwardOnDefeat() + " money");
+        calculatePlayerMoney();
+    }
+
+    private boolean isPlayerAlive() {
+        return getObstacle().getHealth() < getPlayer().getHealth();
+    }
+
+
+    private boolean isBothAlive() {
+        return getPlayer().getHealth() > 0 && getObstacle().getHealth() > 0;
+    }
+
+    private String getBattleChoiceFromPlayer() {
+        String battleChoice;
+        System.out.println("<A>ttack or <R>un away ?");
+        battleChoice = scanner.nextLine();
+        battleChoice = battleChoice.toUpperCase();
+        return battleChoice;
+    }
+
+    private boolean determineFirstAttacker() {
+        boolean isPlayerFirst = generateFirstAttackChance();
+        if (isPlayerFirst) {
+            System.out.println("You will attack first !");
+        }else{
+            System.out.println("Enemy will attack first");
+        }
+
+        return isPlayerFirst;
+    }
+
+    private void playerFirstBattleRound() {
+        playerAttacks();
+        battleInfo();
+
+        if (isAlive(getObstacle())) {
+            obstacleAttacks();
+            battleInfo();
+        }
+    }
+
+    private void playerSecondBattleRound() {
+        obstacleAttacks();
+        battleInfo();
+
+        if (isAlive(getPlayer())) {
+            playerAttacks();
+            battleInfo();
+        }
+    }
+
+    private boolean generateFirstAttackChance() {
+        Random random = new Random();
+        return random.nextBoolean();
     }
 
     private void calculatePlayerMoney() {
