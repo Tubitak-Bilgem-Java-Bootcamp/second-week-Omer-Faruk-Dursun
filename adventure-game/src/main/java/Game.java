@@ -1,6 +1,9 @@
-import location.ItemStore;
+import location.battlelocation.Cave;
+import location.battlelocation.Forest;
+import location.battlelocation.River;
+import location.normallocation.ItemStore;
 import location.Location;
-import location.SafeHouse;
+import location.normallocation.SafeHouse;
 import player.Player;
 
 import java.util.Scanner;
@@ -8,6 +11,7 @@ import java.util.Scanner;
 public class Game {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final static String ASCI_ART_MAIN_ART = "-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-";
 
     public void start(){
         System.out.println("Welcome to this adventure game !");
@@ -22,12 +26,15 @@ public class Game {
         while(true){
             boolean continueGame = true;
             player.getPlayerStats();
-            System.out.println("-------------------------------------------");
+            System.out.println(ASCI_ART_MAIN_ART);
             System.out.println("Please select the location you want to go.");
-            System.out.println("0. Exit the Game");
             System.out.println("1. Safe House --->  Restores health to full");
             System.out.println("2. Item Store --->  You can buy weapons and armor here");
-            System.out.println("-------------------------------------------\n");
+            System.out.println("3. Cave --->  You can get Food from here");
+            System.out.println("4. Forest --->  You can get Firewood' from here");
+            System.out.println("5. River --->  You can get Water from here");
+            System.out.println("0. Exit the Game");
+            System.out.println(ASCI_ART_MAIN_ART + "\n");
 
             Scanner scanner = new Scanner(System.in);
             int characterSelectionInput = scanner.nextInt();
@@ -42,6 +49,17 @@ public class Game {
                 case 2:
                     location = new ItemStore(player);
                     break;
+                case 3:
+                    location = new Cave(player);
+                    break;
+                case 4:
+                    location = new Forest(player);
+                    break;
+                case 5:
+                    location = new River(player);
+                    break;
+                default:
+                    System.out.println("Please enter a valid location.");
             }
 
             if (!continueGame){
