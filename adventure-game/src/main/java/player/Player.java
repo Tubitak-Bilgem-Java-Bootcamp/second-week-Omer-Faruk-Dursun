@@ -4,7 +4,11 @@ import characters.Archer;
 import characters.GameCharacter;
 import characters.Knight;
 import characters.Samurai;
+import location.ItemStore;
+import location.Location;
+import location.SafeHouse;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Player {
@@ -69,13 +73,13 @@ public class Player {
 
         switch (characterSelectionInput) {
             case 1:
-                initPlayerStats(new Archer());
+                initPlayerStats(new Samurai());
                 break;
             case 2:
-                initPlayerStats(new Knight());
+                initPlayerStats(new Archer());
                 break;
             case 3:
-                initPlayerStats(new Samurai());
+                initPlayerStats(new Knight());
                 break;
             default:
                 initPlayerStats(new Knight());
@@ -95,5 +99,9 @@ public class Player {
                 + ", health " + this.health
                 + ", damage " + this.damage
                 + ", money " + this.money);
+    }
+
+    public void selectLocation() {
+
     }
 }
