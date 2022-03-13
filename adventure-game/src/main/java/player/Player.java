@@ -1,3 +1,10 @@
+package player;
+
+import characters.Archer;
+import characters.GameCharacter;
+import characters.Knight;
+import characters.Samurai;
+
 public class Player {
 
     final private String name;

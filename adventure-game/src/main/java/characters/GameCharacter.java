@@ -1,3 +1,5 @@
+package characters;
+
 public abstract class GameCharacter {
     final private String name;
     private Integer health;
