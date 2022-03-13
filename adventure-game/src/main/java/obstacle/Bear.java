@@ -1,6 +1,6 @@
 package obstacle;
 
-public class Bear extends Obstacle{
+public class Bear extends Obstacle {
 
     private final static Integer ID = 3;
     private final static String NAME = "Bear";
@@ -11,5 +11,10 @@ public class Bear extends Obstacle{
 
     public Bear() {
         super(ID, NAME, MAX_HEALTH, HEALTH, DAMAGE, AWARD_ON_DEFEAT);
+    }
+
+    @Override
+    public Integer calculateDamage() {
+        return getDamage();
     }
 }

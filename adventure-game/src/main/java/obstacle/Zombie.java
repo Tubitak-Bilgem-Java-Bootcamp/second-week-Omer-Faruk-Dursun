@@ -1,6 +1,6 @@
 package obstacle;
 
-public class Zombie extends Obstacle{
+public class Zombie extends Obstacle {
 
     private final static Integer ID = 1;
     private final static String NAME = "Zombie";
@@ -11,6 +11,11 @@ public class Zombie extends Obstacle{
 
     public Zombie() {
         super(ID, NAME, MAX_HEALTH, HEALTH, DAMAGE, AWARD_ON_DEFEAT);
+    }
+
+    @Override
+    public Integer calculateDamage() {
+        return getDamage();
     }
 
 }

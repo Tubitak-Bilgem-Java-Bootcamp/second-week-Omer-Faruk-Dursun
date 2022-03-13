@@ -1,6 +1,6 @@
 package obstacle;
 
-public class Vampire extends Obstacle{
+public class Vampire extends Obstacle {
 
     private final static Integer ID = 2;
     private final static String NAME = "Vampire";
@@ -12,4 +12,10 @@ public class Vampire extends Obstacle{
     public Vampire() {
         super(ID, NAME, MAX_HEALTH, HEALTH, DAMAGE, AWARD_ON_DEFEAT);
     }
+
+    @Override
+    public Integer calculateDamage() {
+        return getDamage();
+    }
+
 }

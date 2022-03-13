@@ -44,6 +44,8 @@ public abstract class Obstacle {
         return awardOnDefeat;
     }
 
+    public abstract Integer calculateDamage();
+
     public void getStats() {
         System.out.println("\n");
         System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~");
@@ -54,4 +56,6 @@ public abstract class Obstacle {
         );
         System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~\n");
     }
+
+
 }

@@ -54,15 +54,19 @@ public abstract class BattleLocation extends Location {
     }
 
     private void getLocationAward() {
-        System.out.println("You gained the " + getAward() + " for defeating all the monsters in this area");
-
         if (this.award == "Food") {
             getPlayer().getInventory().setFood(true);
         } else if (this.award == "Firewood") {
             getPlayer().getInventory().setFirewood(true);
-        } else {
+        } else if (this.award == "Water") {
             getPlayer().getInventory().setWater(true);
         }
+        if (award.equals("")){
+            System.out.println("This area doesn't contain an special item for clearing it");
+        }else {
+            System.out.println("You gained the " + getAward() + " for defeating all the monsters in this area");
+        }
+
     }
 
     public Integer generateRandomNumberOfObstacle() {
@@ -187,7 +191,7 @@ public abstract class BattleLocation extends Location {
 
     private void obstacleAttacks() {
         System.out.println("Enemy attacks !");
-        Integer obstacleDamage = getObstacle().getDamage() - getPlayer().getInventory().getArmor().getBlock();
+        Integer obstacleDamage = getObstacle().calculateDamage() - getPlayer().getInventory().getArmor().getBlock();
 
         if (obstacleDamage < 0)
             obstacleDamage = 0;

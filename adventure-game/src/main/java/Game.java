@@ -1,5 +1,6 @@
 import location.battlelocation.Cave;
 import location.battlelocation.Forest;
+import location.battlelocation.Mine;
 import location.battlelocation.River;
 import location.normallocation.ItemStore;
 import location.Location;
@@ -25,21 +26,13 @@ public class Game {
         Location location = new SafeHouse(player);
         while (true) {
             boolean continueGame = true;
+
             player.getStats();
-            System.out.println(ASCI_ART_MAIN_ART);
-            System.out.println("Please select the location you want to go.");
-            System.out.println("1. Safe House --->  Restores health to full");
-            System.out.println("2. Item Store --->  You can buy weapons and armor here");
-            System.out.println("3. Cave --->  You can get Food from here");
-            System.out.println("4. Forest --->  You can get Firewood' from here");
-            System.out.println("5. River --->  You can get Water from here");
-            System.out.println("0. Exit the Game");
-            System.out.println(ASCI_ART_MAIN_ART + "\n");
+            showMainMenu();
 
-            Scanner scanner = new Scanner(System.in);
-            int characterSelectionInput = scanner.nextInt();
+            int locationSelectionInput = locationSelectionInput();
 
-            switch (characterSelectionInput) {
+            switch (locationSelectionInput) {
                 case 0:
                     continueGame = false;
                     break;
@@ -57,6 +50,9 @@ public class Game {
                     break;
                 case 5:
                     location = selectRiver(player);
+                    break;
+                case 6:
+                    location = new Mine(player);
                     break;
                 default:
                     System.out.println("Please enter a valid location.");
@@ -76,6 +72,26 @@ public class Game {
                 break;
             }
         }
+    }
+
+    private int locationSelectionInput() {
+        int characterSelectionInput;
+        Scanner scanner = new Scanner(System.in);
+        characterSelectionInput = scanner.nextInt();
+        return characterSelectionInput;
+    }
+
+    private void showMainMenu() {
+        System.out.println(ASCI_ART_MAIN_ART);
+        System.out.println("Please select the location you want to go.");
+        System.out.println("1. Safe House --->  Restores health to full");
+        System.out.println("2. Item Store --->  You can buy weapons and armor here");
+        System.out.println("3. Cave --->  You can get Food from here");
+        System.out.println("4. Forest --->  You can get Firewood' from here");
+        System.out.println("5. River --->  You can get Water from here");
+        System.out.println("6. Mine --->  You can get randomized items from here");
+        System.out.println("0. Exit the Game");
+        System.out.println(ASCI_ART_MAIN_ART + "\n");
     }
 
     private Location selectCave(Player player) {
