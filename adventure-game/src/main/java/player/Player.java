@@ -4,11 +4,8 @@ import characters.Archer;
 import characters.GameCharacter;
 import characters.Knight;
 import characters.Samurai;
-import location.ItemStore;
-import location.Location;
-import location.SafeHouse;
+import inventory.Inventory;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Player {
@@ -18,9 +15,11 @@ public class Player {
     private Integer health;
     private Integer damage;
     private Integer money;
+    private Inventory inventory;
 
     public Player(String name) {
         this.name = name;
+        this.inventory = new Inventory();
     }
 
     public String getName() {
@@ -44,7 +43,7 @@ public class Player {
     }
 
     public Integer getDamage() {
-        return damage;
+        return damage + getInventory().getWeapon().getDamage();
     }
 
     public void setDamage(Integer damage) {
@@ -57,6 +56,10 @@ public class Player {
 
     public void setMoney(Integer money) {
         this.money = money;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public void selectCharacter() {
@@ -84,7 +87,6 @@ public class Player {
             default:
                 initPlayerStats(new Knight());
         }
-        getPlayerStats();
     }
 
     private void initPlayerStats(GameCharacter gameCharacter) {
@@ -96,9 +98,9 @@ public class Player {
 
     public void getPlayerStats() {
         System.out.println("Your selected character is " + this.getCharacterName()
-                + ", health " + this.health
-                + ", damage " + this.damage
-                + ", money " + this.money);
+                + ", health " + getHealth()
+                + ", damage " + getDamage()
+                + ", money " + getMoney() + "\n");
     }
 
     public void selectLocation() {
