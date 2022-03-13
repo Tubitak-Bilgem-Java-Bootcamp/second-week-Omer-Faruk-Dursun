@@ -127,7 +127,7 @@ public class Player {
         System.out.println("Your selected character is " + this.getCharacterName()
                 + "\nHealth " + getHealth()
                 + "\nWeapon " + getInventory().getWeapon().getName()
-                + "\nDamage " + getDamage()
+                + "\nDamage " + getTotalDamage()
                 + "\nArmor " + getInventory().getArmor().getName()
                 + "\nBlock " + getInventory().getArmor().getBlock()
                 + "\nMoney " + getMoney());

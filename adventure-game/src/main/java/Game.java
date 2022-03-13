@@ -13,17 +13,17 @@ public class Game {
     private final Scanner scanner = new Scanner(System.in);
     private final static String ASCI_ART_MAIN_ART = "-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-=x=-";
 
-    public void start(){
+    public void start() {
         System.out.println("Welcome to this adventure game !");
         System.out.println("Please enter the name of your character:");
 
         String playerName = scanner.nextLine();
         Player player = new Player(playerName);
-        System.out.println(player.getName()+ " welcome to the game !\n");
+        System.out.println(player.getName() + " welcome to the game !\n");
         player.selectCharacter();
 
-        Location location =  new SafeHouse(player);
-        while(true){
+        Location location = new SafeHouse(player);
+        while (true) {
             boolean continueGame = true;
             player.getStats();
             System.out.println(ASCI_ART_MAIN_ART);
@@ -41,7 +41,7 @@ public class Game {
 
             switch (characterSelectionInput) {
                 case 0:
-                    continueGame =false;
+                    continueGame = false;
                     break;
                 case 1:
                     location = new SafeHouse(player);
@@ -62,12 +62,17 @@ public class Game {
                     System.out.println("Please enter a valid location.");
             }
 
-            if (!continueGame){
+            if (!continueGame) {
                 break;
             }
 
-            if(!location.onLocation()){
-                System.out.println("Game over");
+            if (!location.onLocation()) {
+                if (player.getHealth() <= 0){
+                    System.out.println("Game over");
+                }
+                else{
+                    System.out.println("You won the game congrats !");
+                }
                 break;
             }
         }

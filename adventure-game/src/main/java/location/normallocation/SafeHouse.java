@@ -15,6 +15,12 @@ public class SafeHouse extends NormalLocation{
         System.out.println("You are on the " + LOCATION_NAME +" !");
         System.out.println("Your health have been restored to full !");
         getPlayer().setHealth(getPlayer().getMaxHealth());
-        return super.onLocation();
+
+        if (getPlayer().getInventory().isFirewood() && getPlayer().getInventory().isFood() && getPlayer().getInventory().isWater()){
+            System.out.println("You collected all the necessary items and survived !");
+            return false;
+        }
+
+        return true;
     }
 }

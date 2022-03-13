@@ -41,6 +41,7 @@ public abstract class BattleLocation extends Location {
         if (battleChoice.equals("F")) {
             if (combat(numberOfObstacles)) {
                 System.out.println("You have defeated all the monsters in the " + this.getName());
+                getLocationAward();
                 return true;
             }
         }
@@ -49,8 +50,21 @@ public abstract class BattleLocation extends Location {
             return false;
         }
 
-
         return true;
+    }
+
+    private void getLocationAward() {
+        System.out.println("You gained the " + getAward() + " for defeating all the monsters in this area");
+
+        if (this.award == "Food"){
+            getPlayer().getInventory().setFood(true);
+        }
+        else if (this.award == "Firewood"){
+            getPlayer().getInventory().setFirewood(true);
+        }
+        else{
+            getPlayer().getInventory().setWater(true);
+        }
     }
 
     public Integer generateRandomNumberOfObstacle() {
