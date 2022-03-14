@@ -26,7 +26,7 @@ public class Snake extends Obstacle {
     @Override
     public Integer getDamage() {
         Random random = new Random();
-        return random.nextInt(3)+3;
+        return random.nextInt(3)+4;
     }
 
     @Override
