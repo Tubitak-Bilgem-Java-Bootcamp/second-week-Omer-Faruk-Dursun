@@ -31,8 +31,11 @@ public class Weapon {
     }
 
     public static Weapon[] listWeapons() {
-        Weapon[] weapons = {new Weapon(1, "Gun", 5, 10),
-                new Weapon(2, "Sword", 3, 5)};
+        Weapon[] weapons = new Weapon[3];
+        weapons[0] = new Weapon(1, "Hand Gun", 2, 25);
+        weapons[1] = new Weapon(2, "Sword", 3, 35);
+        weapons[2] = new Weapon(3, "Rifle", 7, 45);
+
         return weapons;
     }
 

@@ -1,7 +1,10 @@
 package location.battlelocation;
 
+import Item.Armor;
+import Item.Weapon;
 import location.Location;
 import obstacle.Obstacle;
+import obstacle.Snake;
 import player.Player;
 
 import java.util.Random;
@@ -61,9 +64,9 @@ public abstract class BattleLocation extends Location {
         } else if (this.award == "Water") {
             getPlayer().getInventory().setWater(true);
         }
-        if (award.equals("")){
+        if (award.equals("")) {
             System.out.println("This area doesn't contain an special item for clearing it");
-        }else {
+        } else {
             System.out.println("You gained the " + getAward() + " for defeating all the monsters in this area");
         }
 
@@ -98,7 +101,7 @@ public abstract class BattleLocation extends Location {
             }
 
             if (isPlayerAlive()) {
-                gainMoneyAfterVictory();
+                gainMoneyAwardAfterVictory();
             } else {
                 return false;
             }
@@ -106,10 +109,9 @@ public abstract class BattleLocation extends Location {
         return true;
     }
 
-    private void gainMoneyAfterVictory() {
-        System.out.println("You won !");
-        System.out.println("You gained " + getObstacle().getAwardOnDefeat() + " money");
-        calculatePlayerMoney();
+    private void gainMoneyAwardAfterVictory() {
+        System.out.println("|| You won ! ||");
+        calculatePlayerAward();
     }
 
     private boolean isPlayerAlive() {
@@ -133,7 +135,7 @@ public abstract class BattleLocation extends Location {
         boolean isPlayerFirst = generateFirstAttackChance();
         if (isPlayerFirst) {
             System.out.println("You will attack first !");
-        }else{
+        } else {
             System.out.println("Enemy will attack first");
         }
 
@@ -165,9 +167,48 @@ public abstract class BattleLocation extends Location {
         return random.nextBoolean();
     }
 
-    private void calculatePlayerMoney() {
-        Integer playerTotalMoney = getPlayer().getMoney() + getObstacle().getAwardOnDefeat();
-        getPlayer().setMoney(playerTotalMoney);
+    private void calculatePlayerAward() {
+        Object o = getObstacle().getAwardOnDefeat();
+
+        if (o instanceof Weapon) {
+            getWeaponAward(o);
+        } else if (o instanceof Armor) {
+            getArmorAward(o);
+        } else if (o instanceof Integer){
+            getMoneyAward(o);
+        }else{
+            getNoAward();
+        }
+    }
+
+    private void getWeaponAward(Object o) {
+        Weapon weaponAward = (Weapon) o;
+        System.out.println("|| You gained " + weaponAward.getName() + " for defeating this monster ! ||");
+
+        System.out.println("Chancing your current armor " + getPlayer().getInventory().getWeapon().getName() + ", to "
+                + weaponAward.getName());
+        getPlayer().getInventory().setWeapon(weaponAward);
+    }
+
+    private void getArmorAward(Object o) {
+        Armor armorAward = (Armor) o;
+        System.out.println("|| You gained " + armorAward.getName() + " for defeating this monster ! ||");
+
+        System.out.println("Chancing your current armor " + getPlayer().getInventory().getArmor().getName() + ", to "
+                + armorAward.getName());
+        getPlayer().getInventory().setArmor(armorAward);
+    }
+
+    private void getMoneyAward(Object o) {
+        Integer moneyAward = (Integer) o;
+        System.out.println("|| You gained " + moneyAward + " coin for defeating this monster ! ||");
+
+        Integer totalMoney = getPlayer().getMoney() + moneyAward;
+        getPlayer().setMoney(totalMoney);
+    }
+
+    private void getNoAward() {
+        System.out.println("|| You gained nothing for defeating this monster :( ||\n|| Better luck next time ||");
     }
 
     private boolean isAlive(Object o) {

@@ -40,7 +40,7 @@ public abstract class Obstacle {
         return damage;
     }
 
-    public Integer getAwardOnDefeat() {
+    public Object getAwardOnDefeat() {
         return awardOnDefeat;
     }
 
@@ -52,7 +52,6 @@ public abstract class Obstacle {
         System.out.println("Enemy name is " + getName()
                 + "\nHealth " + getHealth()
                 + "\nDamage " + getDamage()
-                + "\nHealth " + getAwardOnDefeat()
         );
         System.out.println("~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~^~\n");
     }
